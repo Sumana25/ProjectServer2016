@@ -32,7 +32,7 @@ public class JsonServer {
 
     public static void main(final String... args) throws IOException {
         final HttpServer server = HttpServer.create(new InetSocketAddress(PORT), BACKLOG);
-        server.createContext("/func1", he -> {
+        server.createContext("/do_action", he -> {
             try {
                 final Headers headers = he.getResponseHeaders();
                 final String requestMethod = he.getRequestMethod().toUpperCase();
