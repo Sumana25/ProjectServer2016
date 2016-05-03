@@ -31,6 +31,20 @@ public class JsonServer {
     private static final String ALLOWED_METHODS = METHOD_GET + "," + METHOD_OPTIONS;
 
     public static void main(final String... args) throws IOException {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+                    new ServerDiscoverer().respondToDiscovery();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+
         final HttpServer server = HttpServer.create(new InetSocketAddress(PORT), BACKLOG);
         server.createContext("/do_action", he -> {
             try {
@@ -62,6 +76,8 @@ public class JsonServer {
             }
         });
         server.start();
+
+
     }
 
     private static Map<String, List<String>> getRequestParameters(final URI requestUri) {
