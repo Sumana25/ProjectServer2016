@@ -107,7 +107,7 @@ public class JsonServer {
     private static String handleRequest(Map<String, List<String>> request) {
 
 
-            switch (request.get("action").get(0)) {
+            switch (request.get("action"). get(0)) {
                 case "open_notepad" :
                     try {
                         Runtime.getRuntime().exec("notepad");
@@ -133,6 +133,60 @@ public class JsonServer {
                     } finally {
                         return "OK";
                     }
+                case "type":
+                    try {
+                        Runtime.getRuntime().exec("./scripts/type.exe \""+request.get("arg"). get(0)+'"');
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        return "OK";
+                    }
+                case "delete_word":
+                    try {
+                        Runtime.getRuntime().exec("./scripts/delete_word.exe");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        return "OK";
+                    }
+                case "undo":
+                    try {
+                        Runtime.getRuntime().exec("./scripts/undo.exe");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        return "OK";
+                    }
+                case "new_line":
+                case "newline":
+                case "next_line":
+                case "nextline":
+                    try {
+                        Runtime.getRuntime().exec("./scripts/enter.exe");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        return "OK";
+                    }
+                case "close_window":
+                    try {
+                        Runtime.getRuntime().exec("./scripts/close_window.exe");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        return "OK";
+                    }
+                case "switch_window":
+                    try {
+                        Runtime.getRuntime().exec("./scripts/switch_window.exe");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        return "OK";
+                    }
+
+
+
 
                 default:return "NOT_OK";
 
