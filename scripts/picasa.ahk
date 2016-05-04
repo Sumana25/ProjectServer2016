@@ -1,0 +1,1 @@
+Run, C:\Program Files (x86)\Google\Picasa3\picasa3.exe

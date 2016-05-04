@@ -184,6 +184,51 @@ public class JsonServer {
                     } finally {
                         return "OK";
                     }
+                case "time" :
+                    try {
+                        Runtime.getRuntime().exec("timedate.cpl");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        return "OK";
+                    }
+
+                case "calculator" :
+                    try {
+                        Runtime.getRuntime().exec("calc.exe");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        return "OK";
+                    }
+                case "explorer" :
+                    try {
+                        Runtime.getRuntime().exec("explorer.exe");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        return "OK";
+                    }
+
+                case "cmd" :
+                    try {
+                        Runtime.getRuntime().exec("cmd.exe");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        return "OK";
+                    }
+
+                case "photos" :
+                    try {
+                        Runtime.getRuntime().exec("./scripts/picasa.exe");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        return "OK";
+                    }
+
+
 
 
 
