@@ -17,6 +17,9 @@ dependencies {
     compile 'org.simpleframework:simple-http:6.0.1'
     compile 'org.simpleframework:simple-transport:6.0.1'
     compile 'org.simpleframework:simple-common:6.0.1'
+    compile 'com.google.code.gson:gson:2.6.2'
+
+
 
 
 

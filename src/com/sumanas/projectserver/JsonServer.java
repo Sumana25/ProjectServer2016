@@ -1,7 +1,10 @@
 package com.sumanas.projectserver;
 
+import com.google.gson.Gson;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpServer;
+
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.InetSocketAddress;
@@ -227,6 +230,44 @@ public class JsonServer {
                     } finally {
                         return "OK";
                     }
+                case "videos":
+                    System.out.println(showVideoList());
+                    return showVideoList();
+                case "play_video" :
+                    try {
+                        Runtime.getRuntime().exec("./scripts/play_video.exe \""+request.get("arg"). get(0)+'"');
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        return "OK";
+                    }
+
+                case "play" :
+                case "pause":
+                    try {
+                        Runtime.getRuntime().exec("./scripts/play_pause.exe");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        return "OK";
+                    }
+
+                case "volup":
+                    try {
+                        Runtime.getRuntime().exec("./scripts/volup.exe");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        return "OK";
+                    }
+                case "voldown":
+                    try {
+                        Runtime.getRuntime().exec("./scripts/voldown.exe");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        return "OK";
+                    }
 
 
 
@@ -241,4 +282,24 @@ public class JsonServer {
 
 //        return "OK";
     }
+
+    public static String showVideoList() {
+        String userprofile = System.getenv("USERPROFILE");
+        File folder = new File(userprofile+"\\Videos");
+        File[] listOfFiles = folder.listFiles();
+        ArrayList<String>fileNameList = new ArrayList<>();
+        for (int i = 0; i < listOfFiles.length; i++) {
+            if (listOfFiles[i].isFile()) {
+                System.out.println("File " + listOfFiles[i].getName());
+                fileNameList.add(listOfFiles[i].getName());
+
+            } else if (listOfFiles[i].isDirectory()) {
+                System.out.println("Directory " + listOfFiles[i].getName());
+            }
+        }
+        Gson gson = new Gson();
+        return gson.toJson(fileNameList).toString();
+    }
+
 }
+
