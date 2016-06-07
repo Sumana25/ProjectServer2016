@@ -1,0 +1,1 @@
+Send {Alt Down}{Shift Down}{Tab}{Shift Up}{Alt Up}

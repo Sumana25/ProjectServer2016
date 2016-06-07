@@ -164,6 +164,8 @@ public class JsonServer {
                 case "newline":
                 case "next_line":
                 case "nextline":
+                case "enter":
+                case "ente":
                     try {
                         Runtime.getRuntime().exec("./scripts/enter.exe");
                     } catch (IOException e) {
@@ -189,7 +191,7 @@ public class JsonServer {
                     }
                 case "time" :
                     try {
-                        Runtime.getRuntime().exec("timedate.cpl");
+                        Runtime.getRuntime().exec("./scripts/timedate.exe");
                     } catch (IOException e) {
                         e.printStackTrace();
                     } finally {
@@ -242,6 +244,18 @@ public class JsonServer {
                         return "OK";
                     }
 
+                case "music":
+                    System.out.println(showMusicList());
+                    return showMusicList();
+                case "play_music" :
+                    try {
+                        Runtime.getRuntime().exec("./scripts/play_music.exe \""+request.get("arg"). get(0)+'"');
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        return "OK";
+                    }
+
                 case "play" :
                 case "pause":
                     try {
@@ -269,8 +283,92 @@ public class JsonServer {
                         return "OK";
                     }
 
+                case "page_up":
+                    try {
+                        Runtime.getRuntime().exec("./scripts/page_up.exe");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        return "OK";
+                    }
+                case "page_down":
+                    try {
+                        Runtime.getRuntime().exec("./scripts/page_down.exe");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        return "OK";
+                    }
+                case "home":
+                    try {
+                        Runtime.getRuntime().exec("./scripts/home.exe");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        return "OK";
+                    }
+                case "end":
+                    try {
+                        Runtime.getRuntime().exec("./scripts/end.exe");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        return "OK";
+                    }
 
+                case "google":
+                    try {
+                        Runtime.getRuntime().exec("./scripts/google.exe");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        return "OK";
+                    }
 
+                case "next_tab":
+                    try {
+                        Runtime.getRuntime().exec("./scripts/next_tab.exe");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        return "OK";
+                    }
+
+                case "prev_tab":
+                    try {
+                        Runtime.getRuntime().exec("./scripts/prev_tab.exe");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        return "OK";
+                    }
+
+                case "next_prog":
+                    try {
+                        Runtime.getRuntime().exec("./scripts/next_program.exe");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        return "OK";
+                    }
+
+                case "prev_prog":
+                    try {
+                        Runtime.getRuntime().exec("./scripts/prev_program.exe");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        return "OK";
+                    }
+
+                case "close_tab":
+                    try {
+                        Runtime.getRuntime().exec("./scripts/close_tab.exe");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        return "OK";
+                    }
 
 
 
@@ -301,5 +399,22 @@ public class JsonServer {
         return gson.toJson(fileNameList).toString();
     }
 
+    public static String showMusicList() {
+        String userprofile = System.getenv("USERPROFILE");
+        File folder = new File(userprofile+"\\Music");
+        File[] listOfFiles = folder.listFiles();
+        ArrayList<String>fileNameList = new ArrayList<>();
+        for (int i = 0; i < listOfFiles.length; i++) {
+            if (listOfFiles[i].isFile()) {
+                System.out.println("File " + listOfFiles[i].getName());
+                fileNameList.add(listOfFiles[i].getName());
+
+            } else if (listOfFiles[i].isDirectory()) {
+                System.out.println("Directory " + listOfFiles[i].getName());
+            }
+        }
+        Gson gson = new Gson();
+        return gson.toJson(fileNameList).toString();
+    }
 }
 
